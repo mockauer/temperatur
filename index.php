@@ -50,9 +50,9 @@ while ($row = $results->fetchArray()) {
         <div id="chartdiv"></div>
            </div>
     
-    <div id="rightcontent">
-		
-    </div>
+    <!--<div id="rightcontent">
+		hier
+    </div>-->
                     <?php
                     $anzahl = 0;
 $results = $db->query('SELECT count(*) as count FROM wohnzimmer');
