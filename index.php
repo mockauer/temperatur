@@ -54,7 +54,13 @@ while ($row = $results->fetchArray()) {
 		
     </div>
                     <?php
-
+                    $anzahl = 0;
+$results = $db->query('SELECT count(*) as count FROM wohnzimmer');
+	while ($row = $results->fetchArray()) {
+		$anzahl = $row["count"];
+	}
+	
+	//echo $anzahl;
 ?>  
 </div>
 
@@ -83,15 +89,22 @@ var chart = am4core.create("chartdiv", am4charts.XYChart);
 chart.exporting.menu = new am4core.ExportMenu();
 
 // Data for both series
-var data = [ {
-  "date": "2009-12-12",
-  "luftfeuchtigkeit": 50.0,
-  "temperatur": 21.1
-}, {
-  "date": "2010-12-12",
-  "luftfeuchtigkeit": 51.2,
-  "temperatur": 21.2
-}];
+var data = [
+	<?php
+	  $results = $db->query('SELECT * FROM wohnzimmer ORDER BY datum DESC');
+	  $i = 0;
+	while ($row = $results->fetchArray()) { ?>{
+		"date":"<?php echo $row['datum']; ?>",
+		"luftfeuchtigkeit":"<?php echo $row['luftfeuchtigkeit']; ?>",
+		"temperatur":"<?php echo $row['temperatur']; ?>"
+}<?php 
+$i++;
+if ($anzahl > $i){
+	echo ",";
+}
+}
+ ?>
+];
 
 /* Create axes */
 var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -104,8 +117,9 @@ valueAxis.title.text = "Temperatur in °C";
 
 var durationAxis = chart.yAxes.push(new am4charts.DurationAxis());
 durationAxis.title.text = "Luftfeuchtigkeit in %";
-durationAxis.baseUnit = "minute";
+//durationAxis.baseUnit = "minute";
 durationAxis.renderer.grid.template.disabled = true;
+categoryAxis.renderer.labels.template.rotation = 270;
 durationAxis.renderer.opposite = true;
 
 /* Create series */
@@ -120,6 +134,15 @@ columnSeries.columns.template.propertyFields.stroke = "stroke";
 columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
 columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
 columnSeries.tooltip.label.textAlign = "middle";
+
+// Add scrollbar
+chart.scrollbarX = new am4charts.XYChartScrollbar();
+chart.scrollbarX.series.push(columnSeries);
+
+// Add cursor
+chart.cursor = new am4charts.XYCursor();
+chart.cursor.xAxis = categoryAxis;
+chart.cursor.snapToSeries = columnSeries;
 
 var lineSeries = chart.series.push(new am4charts.LineSeries());
 lineSeries.name = "Temperatur";
