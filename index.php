@@ -1,5 +1,9 @@
 <?php
-
+	 function date_german($date) {
+    $d    =    explode("-",$date);
+    
+    return    sprintf("%02d.%02d.%04d", $d[2], $d[1], $d[0]);
+}
 ?>
 <html>
 <head>
@@ -26,7 +30,7 @@
  // echo "<div id='uberschrift'>";
   $results = $db->query('SELECT * FROM wohnzimmer ORDER BY datum DESC LIMIT 1');
 while ($row = $results->fetchArray()) {
-	echo $row["datum"]." - " . $row["temperatur"]."°C - " . $row["luftfeuchtigkeit"]."%<br/>";
+	echo date_german($row["datum"])." - " . $row["temperatur"]."°C - " . $row["luftfeuchtigkeit"]."%<br/>";
     //var_dump($row);
 }
 //echo "</div>":
