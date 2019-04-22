@@ -12,7 +12,7 @@
 <meta http-equiv="language" content="deutsch, de" />
 <meta name="description" content="Monitoring Wohnzimmer Temperatur"/>
 <meta name="author" content="mockauer"/>
-<meta name="copyright" content="(c)mockauer-<?php echo date('Y'); ?>" />
+<meta name="copyright" content="(c)mockauer-2019-<?php echo date('Y'); ?>" />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,7 +55,8 @@ while ($row = $results->fetchArray()) {
     </div>-->
                     <?php
                     $anzahl = 0;
-$results = $db->query('SELECT count(*) as count FROM wohnzimmer');
+// alt $results = $db->query('SELECT count(*) as count FROM wohnzimmer');
+$results = $db->query('select count(*) as count,strftime(\'%M\', datum) as mintime FROM wohnzimmer WHERE mintime = "00" OR mintime = "30"');
 	while ($row = $results->fetchArray()) {
 		$anzahl = $row["count"];
 	}
@@ -91,7 +92,7 @@ chart.exporting.menu = new am4core.ExportMenu();
 // Data for both series
 var data = [
 	<?php
-	  $results = $db->query('SELECT * FROM wohnzimmer ORDER BY datum DESC');
+	  $results = $db->query('select *,strftime(\'%M\', datum) as mintime FROM wohnzimmer WHERE mintime = "00" OR mintime = "30" ORDER BY datum DESC');
 	  $i = 0;
 	while ($row = $results->fetchArray()) { ?>{
 		"date":"<?php echo $row['datum']; ?>",
