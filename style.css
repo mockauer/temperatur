@@ -20,7 +20,7 @@ b{font-size: 100%;}
 @media all and (min-width:1024px) {
 
 #maincontent{
-	width: 950px;
+	width: 1200px;
 	margin: 0 auto;
 }
 
@@ -51,8 +51,8 @@ text-align: justify;
 }
 
 #leftcontent {
-	float: left;
-	width: 700px;
+	/*float: left;
+	width: 700px;*/
 	padding: 10px 0;
 	text-align: justify;
 }
