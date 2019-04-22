@@ -4,16 +4,6 @@
   ini_set('display_errors', 'On');
  
  $db = new SQLite3('temperatur.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-
-
-$results = $db->query('SELECT * FROM wohnzimmer ORDER BY datum DESC');
-while ($row = $results->fetchArray()) {
-    //var_dump($row);
-  //  echo $row["datum"]." - ". $row["temperatur"] . "°C - " . $row["luftfeuchtigkeit"] ."%<br/>";
-}
-
-
-
 ?>
 <?php
 	 function date_german($date) {
