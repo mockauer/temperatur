@@ -33,26 +33,24 @@
   
       <div id="leftcontent">
 		   <h2>Wohnzimmer</h2>
-        <div id="uberschrift"><strong>Aktuelle Temperatur und Luftfeuchtigkeit</strong></div>
-        <?php
+		           <?php
           $db = new SQLite3('temperatur.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
- // echo "<div id='uberschrift'>";
+
   $results = $db->query('SELECT * FROM wohnzimmer ORDER BY datum DESC LIMIT 1');
-while ($row = $results->fetchArray()) {
-	echo date_german($row["datum"])." - " . $row["temperatur"]."°C - " . $row["luftfeuchtigkeit"]."%<br/>";
-    //var_dump($row);
-}
-//echo "</div>":
-        ?>
+	while ($row = $results->fetchArray()) {
+		$zeit = explode(" ", $row["datum"]);
+		?>
+		 <div id="uberschrift"><strong>Aktuelle Temperatur und Luftfeuchtigkeit von <?php echo date_german($row["datum"])." " . $zeit[1] . " - " . $row["temperatur"]."°C - " . $row["luftfeuchtigkeit"]."%"; ?></strong></div>
+		<?php
+	}
+    ?>
+       
+
         
         
         <div id="chartdiv"></div>
            </div>
-    
-    <!--<div id="rightcontent">
-		hier
-    </div>-->
                     <?php
                     $anzahl = 0;
 // alt $results = $db->query('SELECT count(*) as count FROM wohnzimmer');
