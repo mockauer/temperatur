@@ -28,26 +28,11 @@ h1{
 	display:none;
 }
 
-#logo{
-	float: left;
-	margin-top: 10px;
-}
-
-#banner{
-	
-	padding-top: 10px;
-}
-
 .innertube{
 margin: 5px 10px 10px; 
 padding: 10px 5px;
 clear: both;
 text-align: justify;
-}
-
-#bildwechsler {
-	text-align: center;
-	background-color: #382f8a;
 }
 
 #leftcontent {
@@ -59,13 +44,6 @@ text-align: justify;
 
 #leftcontent h2 {
 	border-bottom: 1px solid #000;
-}
-
-#rightcontent {
-	float: right;
-	width: 200px;
-	text-align: right;
-	padding: 10px 0 0;
 }
 
 h1{
@@ -132,67 +110,14 @@ color: #382f8a;
 text-decoration: underline;
 }
 
-
-
-
-ul.egmenu { 
-    background: #382f8a;
-    height: 30px;
-    margin: 0px;
-    padding: 0px;
-}
-
-ul.egmenu > li {
-    float: left;
-    position: relative; 
-}
-
-ul.egmenu ul {
-    background: #444;
-    display: none;
-    position: absolute;
-    left: 0; 
-    top: 100%;
-    padding-left: 0px;
-}
-
-ul.egmenu a {
-    cursor: pointer;
-    display: block;
-    color: white;
-    line-height: 30px;
-    padding: 0 10px;
-}
-
-ul.egmenu li { list-style: none; }
-
-ul.egmenu li:hover { background: #50498a;  }
-ul.egmenu li:hover ul { display: block;  }
-
-.kategorie {
-	float: left;
-	padding: 30px;
-	text-align: 30px;
-	width: 35%;
-	
-}
-
-.progress-bar{
-	background-color: #E6E6E6;
-	width: 100%;
-	border: 1px solid white;
-	margin-top: 5px;
+#temperatur_tabelle{
 	text-align: center;
-	color: white;
+	margin: 0px auto;
 }
 
-.referenz{
+#link_unter_tabelle{
 	float: left;
-	padding: 10px;
-}
-
-.paginierung{
-	text-align: center;
+	margin: 25px;
 }
 
 .site{
