@@ -4,6 +4,11 @@
     
     return    sprintf("%02d.%02d.%04d", $d[2], $d[1], $d[0]);
 }
+
+	 function date_german_time($date) {
+    $d    =    explode("-",$date);
+    return    sprintf("%02d.%02d.%04d %4s", $d[2], $d[1], $d[0], substr($d[2],3,8));
+	}
 ?>
 <html>
 <head>
@@ -50,6 +55,29 @@
         
         
         <div id="chartdiv"></div>
+        <div id="temperatur_tabelle">
+			<div id="uberschrift"><strong>Temperaturen und Luftfeuchtigkeit von heute</strong></div>
+			<?php
+			//dynamisch
+				  //$results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat, strftime(\'%d\', datum) as tag FROM wohnzimmer WHERE ((mintime = "00") AND monat = "'.date("m").' AND tag = "'.date("d").'") ORDER BY datum DESC');
+				  //fest codiert
+				  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat, strftime(\'%d\', datum) as tag FROM wohnzimmer WHERE ((mintime = "00" OR mintime = "30") AND monat = "06" AND tag = "09") ORDER BY datum DESC');
+				  $i=0;
+				  //echo "<div>";
+				while ($row = $results->fetchArray()) {
+					$color = ($i % 2) ? "#FFF" : "#ffdd99";
+					
+					echo "<span style='background-color:$color; float: left; margin:25px;'>";
+					echo date_german_time($row["datum"])." - " . $row["temperatur"]."°C - " . $row["luftfeuchtigkeit"]."%<br/>";
+					echo "</span>";
+					$i++;
+				}
+				//echo "</div>";
+			?>
+			<br/>
+			<div id="link_unter_tabelle"><a class="site_link" href="tabelle.php" target="_self">Tabellenform vom aktuellen Monat</a></div>
+        </div>
+        
            </div>
                     <?php
                     $anzahl = 0;
@@ -59,7 +87,6 @@ $results = $db->query('select count(*) as count,strftime(\'%M\', datum) as minti
 		$anzahl = $row["count"];
 	}
 	
-	//echo $anzahl;
 ?>  
 </div>
 
@@ -90,7 +117,8 @@ chart.exporting.menu = new am4core.ExportMenu();
 // Data for both series
 var data = [
 	<?php
-	  $results = $db->query('select *,strftime(\'%M\', datum) as mintime FROM wohnzimmer WHERE mintime = "00" OR mintime = "30" ORDER BY datum DESC');
+	 // $results = $db->query('select *,strftime(\'%M\', datum) as mintime FROM wohnzimmer WHERE mintime = "00" OR mintime = "30" ORDER BY datum DESC');
+	  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat FROM wohnzimmer WHERE ((mintime = "00") AND monat = "'.date("m").'") ORDER BY datum ASC');
 	  $i = 0;
 	while ($row = $results->fetchArray()) { ?>{
 		"date":"<?php echo $row['datum']; ?>",
@@ -163,5 +191,7 @@ circle.strokeWidth = 3;
 
 chart.data = data;
 </script>
+
+
 </body>
 </html>
