@@ -40,11 +40,14 @@ $monat=array("Januar", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "
 
        
 
-        
+        <div id="link_uber_tabelle">
+			<a class="site_link" href="index.php" target="_self">&Uuml;bersichtsseite</a>
+		</div>
     
         <div id="temperatur_tabelle">
 					<?php
 		  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat FROM wohnzimmer WHERE ((mintime = "00" OR mintime= "30") AND monat = "'.date("m").'") ORDER BY datum DESC');
+		  //$results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat FROM wohnzimmer WHERE ((mintime = "00" OR mintime= "30") AND monat = "06") ORDER BY datum DESC');
   $i=0;
 while ($row = $results->fetchArray()) {
 	$color = ($i % 2) ? "#FFF" : "#ffdd99";

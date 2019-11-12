@@ -117,8 +117,8 @@ chart.exporting.menu = new am4core.ExportMenu();
 // Data for both series
 var data = [
 	<?php
-	 // $results = $db->query('select *,strftime(\'%M\', datum) as mintime FROM wohnzimmer WHERE mintime = "00" OR mintime = "30" ORDER BY datum DESC');
-	  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat FROM wohnzimmer WHERE ((mintime = "00") AND monat = "'.date("m").'") ORDER BY datum ASC');
+	  //$results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat FROM wohnzimmer WHERE ((mintime = "00") AND monat = "'.date("m").'") ORDER BY datum ASC');
+	  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%H\', datum) as hour, strftime(\'%m\', datum) as monat FROM wohnzimmer WHERE (((mintime = "00" AND hour = "00") OR (mintime = "00" AND hour = "06") OR (mintime = "00" AND hour = "12") OR (mintime = "00" AND hour = "18")) AND monat = "'.date("m").'") ORDER BY datum ASC');
 	  $i = 0;
 	while ($row = $results->fetchArray()) { ?>{
 		"date":"<?php echo $row['datum']; ?>",
