@@ -59,9 +59,9 @@
 			<div id="uberschrift"><strong>Temperaturen und Luftfeuchtigkeit von heute</strong></div>
 			<?php
 			//dynamisch
-				  //$results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat, strftime(\'%d\', datum) as tag FROM wohnzimmer WHERE ((mintime = "00") AND monat = "'.date("m").' AND tag = "'.date("d").'") ORDER BY datum DESC');
+				  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat, strftime(\'%d\', datum) as tag FROM wohnzimmer WHERE ((mintime = "00") AND monat = "'.date("m").' AND tag = "'.date("d").'") ORDER BY datum DESC');
 				  //fest codiert
-				  $results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat, strftime(\'%d\', datum) as tag FROM wohnzimmer WHERE ((mintime = "00" OR mintime = "30") AND monat = "06" AND tag = "09") ORDER BY datum DESC');
+				  //$results = $db->query('select *,strftime(\'%M\', datum) as mintime, strftime(\'%m\', datum) as monat, strftime(\'%d\', datum) as tag FROM wohnzimmer WHERE ((mintime = "00" OR mintime = "30") AND monat = "06" AND tag = "09") ORDER BY datum DESC');
 				  $i=0;
 				  //echo "<div>";
 				while ($row = $results->fetchArray()) {
@@ -195,3 +195,7 @@ chart.data = data;
 
 </body>
 </html>
+
+<?php
+//DurchschnittTemperatur speichern und alles nach einem Jahr löschen
+>
