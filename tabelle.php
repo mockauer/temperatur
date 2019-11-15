@@ -38,11 +38,9 @@ $monat=array("Januar", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "
 		?>
 		 <div id="uberschrift"><strong>Temperaturen und Luftfeuchtigkeit von <?php echo $monat["$zahl_monat"]; ?></strong></div>
 
-       
-
-        <div id="link_uber_tabelle">
-			<a class="site_link" href="index.php" target="_self">&Uuml;bersichtsseite</a>
-		</div>
+       <?php
+			include("menu.php");
+        ?>
     
         <div id="temperatur_tabelle">
 					<?php
@@ -58,7 +56,9 @@ while ($row = $results->fetchArray()) {
 }
     ?>
 			<br/>
-			<div id="link_unter_tabelle"><a class="site_link" href="index.php" target="_self">&Uuml;bersichtsseite</a></div>
+			<?php
+			include("menu.php");
+        ?>
         </div>
         
            </div>
